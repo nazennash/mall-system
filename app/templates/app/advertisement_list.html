@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Advertisement List{% endblock title %}
+{% block content %}
+<div>
+    <section>
+        <h2>Advertisements</h2>
+        {% for advertisement in advertisements %}
+        <div>
+            <h3>{{ advertisement.name }}</h3>
+            <img src="{{ advertisement.image.url }}" alt="{{ advertisement.name }}">
+            <p><strong>Link:</strong> <a href="{{ advertisement.link }}" target="_blank">{{ advertisement.link
+                    }}</a></p>
+            <p><strong>Duration:</strong> {{ advertisement.start_date }} - {{ advertisement.end_date }}</p>
+        </div>
+        {% empty %}
+        <p>No advertisements available.</p>
+        {% endfor %}
+    </section>
+</div>
+
+{% endblock content %}

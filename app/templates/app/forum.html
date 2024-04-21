@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Forum{% endblock title %}
+{% block content %}
+
+<div class="container mx-auto">
+    <div class="mb-5">
+        <form action="">
+            <input class="w-[250px] border border-black p-1 rounded-md" type="text" name="q" id=""
+                placeholder="search for a room, topic ...">
+        </form>
+    </div>
+    <hr>
+    <div class="grid grid-cols-12 gap-5 mt-5">
+        <div class="col-span-3">
+            <ul>
+                <li><a href="{% url 'forum' %}">All</a></li>
+                {% for topic in topics %}
+                <li><a href="{% url 'forum' %}?q={{topic.name}}">{{topic.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-span-6">
+            <div class="mb-3">
+                <div class="flex justify-between align-center">
+                    <h2>Forum Posts</h2>
+                    <a href="{% url 'add_forum_post' %}">Create a Forum</a>
+                </div>
+                <ul>
+                    {% for post in posts %}
+                    <div class="flex align-center mt-2 mb-2">
+                        <li class="pr-2">@ {{post.host.username}}</li>
+                        <li class="px-2 border-l">{{post.created | timesince}} ago</li>
+                        <p>{{post.id}}</p>
+                    </div>
+                    <li>
+                        <a href="{% url 'forum_room' post.id %}">{{post.title}}</a>
+                    </li>
+
+
+                    <li class="mt-3">{{post.topic}}</li>
+                    <hr class="mt-5 mb-5">
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-span-3">
+            <ul>
+                <li>Feeds</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+<!-- <a href="{% url 'forum_post_detail' post.id %}">{{ post.title }}</a> by {{ post.user.username }} -->

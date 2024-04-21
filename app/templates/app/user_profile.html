@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}User Profile{% endblock title %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-4">User Profile</h1>
+
+    <h2>Welcome <span class="font-bold">{{request.user.username}}</span></h2>
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h2 class="text-xl font-bold mb-4">Profile Information</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            <div class="mb-4">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="mb-4">
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+            </div>
+            <div class="mb-4">
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+            </div>
+            <div class="mb-4">
+                {{ form.delivery_address.label_tag }}
+                {{ form.delivery_address }}
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Update Profile
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

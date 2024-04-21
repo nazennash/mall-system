@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Add Forum Comment{% endblock title %}
+{% block content %}
+<main>
+    <section>
+        <h2>New Comment</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Comment</button>
+        </form>
+    </section>
+</main>
+{% endblock content %}

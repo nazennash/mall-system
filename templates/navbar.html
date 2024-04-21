@@ -1,0 +1,35 @@
+{% load static %}
+
+<header class="text-gray-600 body-font shadow-md mb-10">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <img src="{% static 'logo.png' %}" width="50px" alt="">
+            <a href="/" class="ml-3 text-xl">RealSync</a>
+        </a>
+        {% if request.user.is_authenticated %}
+        <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+            <a href="/" class="mr-5 hover:text-gray-900">Home</a>
+            <a class="mr-5 hover:text-gray-900">About us</a>
+            <a href="{% url 'order_list' %}" class="mr-5 hover:text-gray-900">Orders</a>
+            <a href="{% url 'user_profile' %}" class="mr-5 hover:text-gray-900">Profile</a>
+            <a href="{% url 'forum' %}" class="mr-5 hover:text-gray-900">Forum</a>
+        </nav>
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}"
+            class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Logout
+        </a>
+        {% else %}
+        <span>
+            <a href="{% url 'login' %}"
+                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Login
+            </a>
+            <a href="{% url 'register' %}"
+                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Register
+            </a>
+        </span>
+        {% endif %}
+
+    </div>
+</header>

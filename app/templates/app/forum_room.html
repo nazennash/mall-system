@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Forum{% endblock title %}
+{% block content %}
+
+<div class="container mx-auto">
+    <div class="mb-5">
+        <form action="">
+            <input class="w-[250px] border border-black p-1 rounded-md" type="text" name="q" id=""
+                placeholder="search for a room, topic ...">
+        </form>
+    </div>
+    <hr>
+    <div class="grid grid-cols-12 gap-5 mt-5">
+        <div class="col-span-3">
+            <ul>
+                <li><a href="{% url 'forum' %}">All</a></li>
+                {% for topic in topics %}
+                <li><a href="{% url 'forum' %}?q={{topic.name}}">{{topic.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-span-6">
+            <div class="mb-3">
+                <div class="flex justify-between align-center">
+                    <h2>Asked: {{discuss.created | timesince}}</h2>
+                    <h2>Asked by: {{discuss.host.username}}</h2>
+                </div>
+                <div class="mt-8 mb-5">
+                    <p>{{discuss.title}}</p>
+                    <p>{{discuss.content}}</p>
+                </div>
+
+                <hr>
+
+                <div class="mt-5">
+                    <p>Response</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-span-3">
+            <ul>
+                <li>Participants</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+<!-- <a href="{% url 'forum_post_detail' post.id %}">{{ post.title }}</a> by {{ post.user.username }} -->

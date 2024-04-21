@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Product List{% endblock title %}
+{% block content %}
+
+<div class="container mx-auto">
+    <div class="flex items-center justify-center mb-10">
+        <div class="text-center ">
+            <form action="" method="get" class="flex items-center justify-center">
+                <input type="text" name="q" placeholder="Search..."
+                    class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none">
+
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="grid grid-cols-12 mt-5 gap-5">
+
+        <div class="col-span-3">
+            <h2 class="text-xl font-semibold mb-4">Categories</h2>
+            <ul class="mb-4">
+                <li class="cursor-pointer">
+                    <a href="{% url 'product_list' %}">All</a>
+                </li>
+                {% for category in category %}
+                <li><a href="{% url 'product_list' %}?q={{category.id}}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-span-9">
+            <h2 class="text-xl font-semibold mb-4">Available Products</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for product in products %}
+                <div class="bg-white rounded-lg shadow-md p-4">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-lg mb-4 w-[150px]">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ product.name }}</h3>
+                    <p class="text-sm text-gray-600">{{ product.short_description }}</p>
+                    <span class="flex items-center justify-between mt-2">
+                        <p class="font-semibold text-red-600 mt-1 mb-2">{{ product.price }}</p>
+                        <a href="{% url 'product_detail' product.id %}"
+                            class="text-blue-500 hover:underline">more...</a>
+                    </span>
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock content %}
