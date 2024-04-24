@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 from django.contrib import messages
-from .models import Product, Order, Cart, UserProfile, Feedback, Advertisement, ForumPost, ForumComment, Category, UserProfile, ForumTopic
+from .models import Product, Order, Cart, UserProfile, Feedback, Advertisement, ForumPost, ForumComment, Category, UserProfile, ForumTopic, MessageForum
 from .forms import OrderForm, FeedbackForm, ForumPostForm, ForumCommentForm, UserProfileForm, AdvertisementForm
 from django.db.models import Q
 from django.http import JsonResponse
@@ -12,6 +12,9 @@ from django.http import JsonResponse
 
 def index(request):
     return render(request, 'app/index.html')
+
+def about(request):
+    return render(request, 'app/about.html')
 
 def register(request):
     if request.method == 'POST':
@@ -167,14 +170,25 @@ def forum(request, room_id=None):
 
 def forum_room(request, pk):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    
+
 
     discuss = ForumPost.objects.get(id=pk)
 
+    forum_messages = discuss.messages.all().order_by('-created')
+
+    participants = discuss.participants.all()
+
+    if request.method == 'POST':
+        messages = MessageForum.objects.create(
+            owner = request.user,
+            post = discuss,
+            body = request.POST.get('message_body')
+        )
+        return redirect('forum_room', pk=pk)
+
     topics = ForumTopic.objects.all()
 
-
-    context = {'discuss':discuss, 'topics':topics}
+    context = {'discuss':discuss, 'topics':topics, 'forum_messages':forum_messages, 'participants':participants}
     
     
     return render(request, 'app/forum_room.html', context)

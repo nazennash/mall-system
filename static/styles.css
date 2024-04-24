@@ -16,3 +16,21 @@
     min-width: 100%;
     object-fit: cover;
 }
+
+
+html {
+    height: 100%;
+    position: relative;
+}
+
+body {
+    margin: 0;
+    padding-bottom: 60px; /* Height of the footer */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto; /* Pushes footer to the bottom of the page */
+}

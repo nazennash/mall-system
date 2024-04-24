@@ -12,9 +12,9 @@
 
 <body>
     {% include 'navbar.html' %}
-    <div class="root-container" id="root">
-        {% block content %}{% endblock content %}
-    </div>
+    <!-- <div class="root-container" id="root"> -->
+    {% block content %}{% endblock content %}
+    <!-- </div> -->
     {% include 'footer.html' %}
 
     <script src="{% static 'script.js' %}"></script>

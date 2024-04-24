@@ -11,7 +11,7 @@
     </div>
     <hr>
     <div class="grid grid-cols-12 gap-5 mt-5">
-        <div class="col-span-3">
+        <div class="col-span-2">
             <ul>
                 <li><a href="{% url 'forum' %}">All</a></li>
                 {% for topic in topics %}
@@ -19,7 +19,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-span-6">
+        <div class="col-span-6 border-l pl-10">
             <div class="mb-3">
                 <div class="flex justify-between align-center">
                     <h2>Asked: {{discuss.created | timesince}}</h2>
@@ -32,15 +32,46 @@
 
                 <hr>
 
-                <div class="mt-5">
-                    <p>Response</p>
+                <div>
+                    <div class="mt-5 mb-5 text-center font-bold text-xl">
+                        <p>Responses</p>
+                    </div>
+                    <div>
+                        {% if forum_messages %}
+                        <ul>
+                            {% for message in forum_messages %}
+                            <li>
+                                <div class="flex justify-between align-center">
+                                    <strong>{{ message.owner.username }}</strong>
+                                    <small>Created: {{ message.created }}</small>
+                                </div>
+                                <p>{{ message.body }}</p>
+                                <hr class="mt-2">
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No messages found.</p>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <div class="mt-10">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="message_body" placeholder="Write your message here" id="">
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
         </div>
-        <div class="col-span-3">
+        <div class="col-span-3 border-l pl-10">
             <ul>
-                <li>Participants</li>
+                <li class="p-2"><a href="{% url 'forum' %}">Participants</a></li>
+                {% for person in participants %}
+                <li class="p-2"><a>{{person.username}}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>

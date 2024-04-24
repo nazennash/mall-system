@@ -17,10 +17,12 @@
 
             <p><strong>Product Ranking:</strong> {{product.sales_ranking}}
             </p>
+            <a href="{% url 'add_feedback' product_id=product.id %}">Feedback on the product</a>
 
             <div class="flex items-center flex-wrap justify-between">
                 <div class="flex mt-3">
-                    <button class="bg-blue-500 font-bold text-white px-2 py-1 rounded-md">Buy Now</button>
+                    <button class="bg-blue-500 font-bold text-white px-2 py-1 rounded-md" onclick="openModal()">Buy
+                        Now</button>
                     <!-- <button class="btn-add-to-cart-btn bg-green-500 font-bold text-white mx-2 px-2 py-1 rounded-md"
                         type="button" data-product-id="{{product.id}}">Add to
                         Cart</button> -->
@@ -40,6 +42,17 @@
                 </a>
             </div>
         </div>
+    </div>
+</div>
+
+
+<div id="myModal" class="modal hidden fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50">
+    <!-- Modal content -->
+    <div class="modal-content bg-white w-1/3 mx-auto mt-20 p-8 rounded-lg">
+        <span class="close absolute top-0 right-0 text-gray-400 cursor-pointer" onclick="closeModal()">&times;</span>
+        <p class="text-xl font-semibold text-center text-green-500">Success!</p>
+        <p class="text-center mt-4">Your order has been successfully placed.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-6 mx-auto" onclick="closeModal()">Close</button>
     </div>
 </div>
 

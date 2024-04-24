@@ -64,12 +64,18 @@ class UserProfile(models.Model):
     delivery_address = models.TextField()
     order_history = models.ManyToManyField(Order)
 
+    def __str__(self):
+        return str(self.user)
+
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField()
     comment = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.product)
 
 class Advertisement(models.Model):
     name = models.CharField(max_length=200)
@@ -99,18 +105,18 @@ class ForumPost(models.Model):
     class Meta:
         ordering = ['-updated','-created']
     
-class MessaageForum(models.Model):
+class MessageForum(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    room = models.ForeignKey(ForumPost, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(ForumPost, on_delete=models.CASCADE, related_name='messages')
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True, null=True)
-    updated = models.DateTimeField(auto_now_add=True, null=True)
+    updated = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
-        return self.name 
-    
+        return self.body[:50] 
+
     class Meta:
-        ordering = ['-updated','-created']
+        ordering = ['-updated', '-created']
 
 class ForumComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

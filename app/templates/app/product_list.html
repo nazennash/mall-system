@@ -18,16 +18,17 @@
         <div class="col-span-3">
             <h2 class="text-xl font-semibold mb-4">Categories</h2>
             <ul class="mb-4">
-                <li class="cursor-pointer">
+                <li class="cursor-pointer p-2 border-b">
                     <a href="{% url 'product_list' %}">All</a>
                 </li>
                 {% for category in category %}
-                <li><a href="{% url 'product_list' %}?q={{category.id}}">{{ category.name }}</a></li>
+                <li class="p-2 border-b"><a href="{% url 'product_list' %}?q={{category.id}}">{{ category.name }}</a>
+                </li>
                 {% endfor %}
             </ul>
         </div>
 
-        <div class="col-span-9">
+        <div class="col-span-9 border-l pl-10">
             <h2 class="text-xl font-semibold mb-4">Available Products</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for product in products %}

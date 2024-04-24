@@ -16,9 +16,13 @@
             <li class="flex justify-between items-center py-2 border-b border-gray-200">
                 <span>{{ product.name }}</span>
                 <span>${{ product.price }}</span>
+                <span>${{ product.id }}</span>
             </li>
             {% endfor %}
+
         </ul>
+        <!-- <a href="{% url 'add_feedback' product_id=order.id %}">Feedback on the product</a> -->
+
     </div>
 </div>
 

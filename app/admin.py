@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Order, Cart, UserProfile, Feedback, Advertisement, ForumPost, ForumComment, ForumTopic, MessaageForum
+from .models import Category, Product, Order, Cart, UserProfile, Feedback, Advertisement, ForumPost, ForumComment, ForumTopic, MessageForum
 # Register your models here.
 
 admin.site.register(Category)
@@ -12,4 +12,4 @@ admin.site.register(Advertisement)
 admin.site.register(ForumPost)
 admin.site.register(ForumComment)
 admin.site.register(ForumTopic)
-admin.site.register(MessaageForum)
+admin.site.register(MessageForum)
